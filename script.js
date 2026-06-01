@@ -1,6 +1,9 @@
 const screens=[...document.querySelectorAll('.screen')];
-const wheels=[{name:'M-W4',finish:'Frozen Silver',price:'£2,300'},{name:'M-W10',finish:'Neodyme Gold',price:'£3,300'},{name:'M-W2',finish:'Gloss Black',price:'£2,950'}];
-let current=0;
+const wheels=[{name:'M-W4',finish:'Frozen Silver',price:'£2,300',cls:'style1'},{name:'M-W10',finish:'Neodyme Gold',price:'£3,300',cls:'style2'},{name:'M-W2',finish:'Gloss Black',price:'£2,950',cls:'style3'}];let current=0;
 function go(id){screens.forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.getElementById('nav').classList.toggle('hidden',!id.startsWith('admin'))}
-function pick(i){current=i;document.querySelectorAll('.wheel').forEach((w,n)=>w.classList.toggle('active',n===i));document.getElementById('wheelName').textContent=wheels[i].name;document.getElementById('wheelFinish').textContent=wheels[i].finish;document.getElementById('wheelPrice').textContent=wheels[i].price}
+function pick(i){current=i;document.querySelectorAll('.wheel').forEach((w,n)=>w.classList.toggle('active',n===i));document.getElementById('wheelName').textContent=wheels[i].name;document.getElementById('wheelFinish').textContent=wheels[i].finish;document.getElementById('wheelPrice').textContent=wheels[i].price;document.querySelectorAll('.render-wheel').forEach((el,n)=>{el.className='render-wheel '+(n?'rear ':'front ')+wheels[i].cls})}
 function next(){pick((current+1)%wheels.length)}function prev(){pick((current+wheels.length-1)%wheels.length)}
+function setVehicleImage(url){document.querySelectorAll('.uploaded-bg').forEach(el=>{el.style.backgroundImage='url('+url+')';el.classList.add('has-image')});uploadPreview.style.backgroundImage='url('+url+')';uploadPreview.innerHTML='';continueUpload.classList.remove('disabled')}
+function handleFile(file){if(file)setVehicleImage(URL.createObjectURL(file))}
+function useDemo(){document.querySelectorAll('.uploaded-bg').forEach(el=>{el.style.backgroundImage='';el.classList.remove('has-image')});uploadPreview.innerHTML='<span>Demo vehicle selected</span>';continueUpload.classList.remove('disabled');go('vehicleConfirm')}
+['cameraInput','libraryInput','filesInput'].forEach(id=>document.getElementById(id).addEventListener('change',e=>handleFile(e.target.files[0])));pick(0);

@@ -1,77 +1,17 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MW Visualiser Prototype v0.2</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="app">
-  <aside id="nav" class="nav hidden">
-    <h2><span>MW</span><small>Motech Wheels</small></h2>
-    <button onclick="go('adminDashboard')">Dashboard</button>
-    <button onclick="go('adminLeads')">Leads</button>
-    <button onclick="go('adminCatalogue')">Catalogue</button>
-    <button onclick="go('adminShopify')">Shopify</button>
-    <button onclick="go('welcome')">Customer App</button>
-  </aside>
-
-  <main class="frame">
-    <section id="welcome" class="screen active hero">
-      <h3>M-W VISUALISER</h3><div class="car"></div>
-      <h1>Visualise Motech Wheels On Your Car</h1>
-      <p>Upload your vehicle, choose your size, swipe wheels, save, share or shop.</p>
-      <button class="primary" onclick="go('upload')">START VISUALISING →</button>
-      <button class="secondary" onclick="go('adminDashboard')">ADMIN DEMO</button>
-    </section>
-
-    <section id="upload" class="screen">
-      <div class="head"><button onclick="go('welcome')">‹</button><b>Upload Vehicle</b></div><p class="step">Step 1 of 5</p>
-      <div class="choice" onclick="go('vehicleConfirm')">📷 <b>Take Photo</b><small>Use your camera</small></div>
-      <div class="choice" onclick="go('vehicleConfirm')">🖼️ <b>Photo Library</b><small>Choose from gallery</small></div>
-      <div class="choice" onclick="go('vehicleConfirm')">🚘 <b>Demo Vehicles</b><small>Choose a demo car</small></div>
-    </section>
-
-    <section id="vehicleConfirm" class="screen">
-      <div class="head"><button onclick="go('upload')">‹</button><b>Vehicle Detected</b></div>
-      <div class="car small"></div><h1>BMW M5</h1><p>G90 · 2024+</p>
-      <button class="primary" onclick="go('sizeSelect')">YES, THAT'S RIGHT</button>
-      <button class="secondary">NO, CHOOSE MANUALLY</button>
-    </section>
-
-    <section id="sizeSelect" class="screen">
-      <div class="head"><button onclick="go('vehicleConfirm')">‹</button><b>Wheel Size</b></div><p class="step">Step 3 of 5</p>
-      <label>Current Wheel Size</label><select><option>19&quot;</option><option selected>20&quot;</option><option>21&quot;</option><option>22&quot;</option></select>
-      <label>Desired Wheel Size</label><select><option>19&quot;</option><option>20&quot;</option><option selected>21&quot;</option><option>22&quot;</option></select>
-      <div class="tip">★ Recommended: 21&quot; fits your vehicle perfectly with optimum performance.</div>
-      <div class="row"><button class="secondary" onclick="go('vehicleConfirm')">BACK</button><button class="primary" onclick="go('processing')">NEXT</button></div>
-    </section>
-
-    <section id="processing" class="screen">
-      <div class="head"><button onclick="go('sizeSelect')">‹</button><b>Preparing Preview</b></div>
-      <div class="car"></div><div class="ticks"><p>✅ Detecting vehicle</p><p>✅ Detecting wheels</p><p class="orange">◉ Rendering preview</p><p>○ Almost ready...</p></div>
-      <button class="primary" onclick="go('visualiser')">VIEW PREVIEW</button>
-    </section>
-
-    <section id="visualiser" class="screen visualiser">
-      <div class="head"><b>BMW M5 G90</b><button onclick="go('welcome')">⌂</button></div>
-      <div class="car big" id="carPreview"></div>
-      <div class="info"><h2 id="wheelName">M-W4</h2><p id="wheelFinish">Frozen Silver</p><strong id="wheelPrice">£2,300</strong> <small>In Stock</small></div>
-      <div class="carousel"><button onclick="prev()">‹</button><div class="wheel active" onclick="pick(0)">⚙️</div><div class="wheel" onclick="pick(1)">⚙️</div><div class="wheel" onclick="pick(2)">⚙️</div><button onclick="next()">›</button></div>
-      <div class="actions"><button onclick="alert('Favourite saved')">♡<small>Favourite</small></button><button onclick="go('save')">⇩<small>Save</small></button><button onclick="go('share')">↗<small>Share</small></button></div>
-      <button class="primary shop" onclick="go('shopifyHandover')">SHOP NOW</button>
-    </section>
-
-    <section id="save" class="screen"><div class="head"><button onclick="go('visualiser')">‹</button><b>Save Your Design</b></div><p>Save your design and we’ll email it to you.</p><label>First Name</label><input placeholder="Enter your first name"><label>Email Address</label><input placeholder="Enter your email"><button class="primary" onclick="go('visualiser')">SAVE DESIGN</button></section>
-    <section id="share" class="screen"><div class="head"><button onclick="go('visualiser')">‹</button><b>Share Your Design</b></div><p>Share your design with friends and family.</p><input placeholder="First name"><input placeholder="Email address"><button class="whatsapp">WhatsApp</button><button class="facebook">Facebook</button><button class="instagram">Instagram</button><button class="secondary">Email</button></section>
-    <section id="shopifyHandover" class="screen"><h3>Taking You To Motech Wheels</h3><div class="cart">🛒</div><p>Sending your selected wheel, size and finish to Shopify.</p><button class="primary" onclick="go('visualiser')">BACK TO VISUALISER</button></section>
-
-    <section id="adminDashboard" class="screen admin"><h3>MW ADMIN DASHBOARD</h3><div class="grid"><div><b>1,248</b><small>Visitors</small></div><div><b>342</b><small>Leads</small></div><div><b>78</b><small>Hot Leads</small></div><div><b>£24,680</b><small>Revenue Influenced</small></div></div><h3>Top Wheels</h3><ul><li>M-W4 — 312 views</li><li>M-W10 — 276 views</li><li>M-W2 — 198 views</li></ul></section>
-    <section id="adminLeads" class="screen admin"><div class="head"><button onclick="go('adminDashboard')">‹</button><b>Leads</b></div><ul><li>James T. — BMW M5 — Score 95</li><li>Sarah L. — Audi RS6 — Score 86</li><li>Michael R. — Mercedes C63 — Score 73</li></ul></section>
-    <section id="adminCatalogue" class="screen admin"><div class="head"><button onclick="go('adminDashboard')">‹</button><b>Catalogue</b></div><ul><li>M-W4 · 12 variants · 98% health</li><li>M-W10 · 14 variants · 97% health</li><li>M-W2 · 10 variants · 95% health</li></ul><button class="primary">MANAGE CATALOGUE</button></section>
-    <section id="adminShopify" class="screen admin"><div class="head"><button onclick="go('adminDashboard')">‹</button><b>Shopify</b></div><h2>Shopify Connected</h2><div class="grid"><div><b>256</b><small>Products</small></div><div><b>1,284</b><small>Variants</small></div></div><ul><li>Product sync — Success</li><li>Inventory sync — Success</li><li>Price sync — Success</li></ul></section>
-  </main>
-</div>
-<script src="script.js"></script>
-</body>
-</html>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MW Visualiser v0.3</title><link rel="stylesheet" href="style.css"></head><body>
+<div class="app"><aside id="nav" class="nav hidden"><h2><span>MW</span><small>Motech Wheels</small></h2><button onclick="go('adminDashboard')">Dashboard</button><button onclick="go('adminLeads')">Leads</button><button onclick="go('adminCatalogue')">Catalogue</button><button onclick="go('adminShopify')">Shopify</button><button onclick="go('welcome')">Customer App</button></aside>
+<main class="frame">
+<section id="welcome" class="screen active"><h3>M-W VISUALISER</h3><div class="car"></div><h1>Visualise Motech Wheels On Your Car</h1><p>Upload your vehicle, choose your size, swipe wheels, save, share or shop.</p><button class="primary" onclick="go('upload')">START VISUALISING →</button><button class="secondary" onclick="go('adminDashboard')">ADMIN DEMO</button></section>
+<section id="upload" class="screen"><div class="head"><button onclick="go('welcome')">‹</button><b>Upload Vehicle</b></div><p class="step">Step 1 of 5</p><div id="uploadPreview" class="upload-preview"><span>No vehicle image selected</span></div><input id="cameraInput" type="file" accept="image/*" capture="environment" hidden><input id="libraryInput" type="file" accept="image/*" hidden><input id="filesInput" type="file" accept="image/*" hidden><div class="choice" onclick="cameraInput.click()">📷 <b>Take Photo</b><small>Use your camera</small></div><div class="choice" onclick="libraryInput.click()">🖼️ <b>Photo Library</b><small>Choose from gallery / photos</small></div><div class="choice" onclick="filesInput.click()">📁 <b>Files App</b><small>Choose from files</small></div><div class="choice" onclick="useDemo()">🚘 <b>Use Demo Vehicle</b><small>Prototype fallback vehicle</small></div><button id="continueUpload" class="primary disabled" onclick="go('vehicleConfirm')">CONTINUE</button></section>
+<section id="vehicleConfirm" class="screen"><div class="head"><button onclick="go('upload')">‹</button><b>Vehicle Detected</b></div><div class="car small uploaded-bg"></div><h1>BMW M5</h1><p>G90 · 2024+ · Prototype detection</p><button class="primary" onclick="go('sizeSelect')">YES, THAT'S RIGHT</button><button class="secondary">NO, CHOOSE MANUALLY</button></section>
+<section id="sizeSelect" class="screen"><div class="head"><button onclick="go('vehicleConfirm')">‹</button><b>Wheel Size</b></div><p class="step">Step 3 of 5</p><label>Current Wheel Size</label><select><option>18&quot;</option><option>19&quot;</option><option selected>20&quot;</option><option>21&quot;</option><option>22&quot;</option></select><label>Desired Wheel Size</label><select><option>18&quot;</option><option>19&quot;</option><option>20&quot;</option><option selected>21&quot;</option><option>22&quot;</option></select><div class="tip">★ Recommended: 21&quot; gives a stronger stance while retaining a realistic tyre profile.</div><button class="primary" onclick="go('processing')">NEXT</button></section>
+<section id="processing" class="screen"><div class="head"><button onclick="go('sizeSelect')">‹</button><b>Preparing Preview</b></div><div class="car uploaded-bg"></div><p>✅ Vehicle image loaded</p><p>✅ Wheel positions estimated</p><p class="orange">◉ Applying indicative wheel design</p><button class="primary" onclick="go('visualiser')">VIEW PREVIEW</button></section>
+<section id="visualiser" class="screen visualiser"><div class="head"><b>BMW M5 G90</b><button onclick="go('welcome')">⌂</button></div><div class="car big uploaded-bg" id="carPreview"><div class="render-wheel front style1"></div><div class="render-wheel rear style1"></div></div><div class="info"><h2 id="wheelName">M-W4</h2><p id="wheelFinish">Frozen Silver</p><strong id="wheelPrice">£2,300</strong> <small>In Stock</small></div><div class="carousel"><button onclick="prev()">‹</button><div class="wheel active w1" onclick="pick(0)"></div><div class="wheel w2" onclick="pick(1)"></div><div class="wheel w3" onclick="pick(2)"></div><button onclick="next()">›</button></div><div class="actions"><button onclick="alert('Favourite saved')">♡<small>Favourite</small></button><button onclick="go('save')">⇩<small>Save</small></button><button onclick="go('share')">↗<small>Share</small></button></div><button class="primary" onclick="go('shopifyHandover')">SHOP NOW</button></section>
+<section id="save" class="screen"><div class="head"><button onclick="go('visualiser')">‹</button><b>Save Your Design</b></div><p>Save your design and we’ll email it to you.</p><input placeholder="First name"><input placeholder="Email address"><button class="primary" onclick="go('visualiser')">SAVE DESIGN</button></section>
+<section id="share" class="screen"><div class="head"><button onclick="go('visualiser')">‹</button><b>Share Your Design</b></div><p>Share your design with friends and family.</p><input placeholder="First name"><input placeholder="Email address"><button class="whatsapp">WhatsApp</button><button class="facebook">Facebook</button><button class="instagram">Instagram</button><button class="secondary">Email</button></section>
+<section id="shopifyHandover" class="screen"><h3>Taking You To Motech Wheels</h3><div class="cart">🛒</div><p>Sending your selected wheel, size and finish to Shopify.</p><button class="primary" onclick="go('visualiser')">BACK TO VISUALISER</button></section>
+<section id="adminDashboard" class="screen admin"><h3>MW ADMIN DASHBOARD</h3><div class="grid"><div><b>1,248</b><small>Visitors</small></div><div><b>342</b><small>Leads</small></div><div><b>78</b><small>Hot Leads</small></div><div><b>£24,680</b><small>Revenue Influenced</small></div></div><h3>Top Wheels</h3><ul><li>M-W4 — 312 views</li><li>M-W10 — 276 views</li><li>M-W2 — 198 views</li></ul></section>
+<section id="adminLeads" class="screen admin"><div class="head"><button onclick="go('adminDashboard')">‹</button><b>Leads</b></div><ul><li>James T. — BMW M5 — Score 95</li><li>Sarah L. — Audi RS6 — Score 86</li><li>Michael R. — Mercedes C63 — Score 73</li></ul></section>
+<section id="adminCatalogue" class="screen admin"><div class="head"><button onclick="go('adminDashboard')">‹</button><b>Catalogue</b></div><ul><li>M-W4 · 12 variants · 98% health</li><li>M-W10 · 14 variants · 97% health</li><li>M-W2 · 10 variants · 95% health</li></ul></section>
+<section id="adminShopify" class="screen admin"><div class="head"><button onclick="go('adminDashboard')">‹</button><b>Shopify</b></div><h2>Shopify Connected</h2><div class="grid"><div><b>256</b><small>Products</small></div><div><b>1,284</b><small>Variants</small></div></div><ul><li>Product sync — Success</li><li>Inventory sync — Success</li><li>Price sync — Success</li></ul></section>
+</main></div><script src="script.js"></script></body></html>
